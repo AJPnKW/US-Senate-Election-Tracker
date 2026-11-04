@@ -1,7 +1,7 @@
 {
   "source_validated": true,
   "source": "Official state election offices via Open America",
-  "updated_at": "2026-11-04T07:19:07+00:00",
+  "updated_at": "2026-11-04T15:33:10+00:00",
   "stale": false,
   "live": true,
   "races": [
@@ -11,27 +11,27 @@
         {
           "name": "Roy Cooper",
           "party": "D",
-          "votes": 2462440
+          "votes": 2467963
         },
         {
           "name": "Michael Whatley",
           "party": "R",
-          "votes": 1640368
+          "votes": 1643088
         },
         {
           "name": "Shannon W. Bray",
           "party": "O",
-          "votes": 55718
+          "votes": 55726
         },
         {
           "name": "Michael Dublin",
           "party": "O",
-          "votes": 36426
+          "votes": 36404
         }
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-04T07:19:07+00:00",
+      "updated_at": "2026-11-04T15:33:10+00:00",
       "source": "Official state election offices via Open America"
     },
     {
@@ -40,22 +40,22 @@
         {
           "name": "James Talarico",
           "party": "D",
-          "votes": 4546036
+          "votes": 5405050
         },
         {
           "name": "Ken Paxton",
           "party": "R",
-          "votes": 3567899
+          "votes": 4227281
         },
         {
           "name": "Ted Brown",
           "party": "O",
-          "votes": 143283
+          "votes": 188747
         }
       ],
-      "reporting_pct": 47.0,
+      "reporting_pct": 99.0,
       "called_party": null,
-      "updated_at": "2026-11-04T07:19:07+00:00",
+      "updated_at": "2026-11-04T15:33:10+00:00",
       "source": "Official state election offices via Open America"
     }
   ]
