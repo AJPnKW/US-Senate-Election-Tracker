@@ -28,7 +28,7 @@ jobs:
       - name: Check optional Election.org developer API
         env:
           ELECTION_ORG_API_KEY: ${{ secrets.ELECTION_ORG_API_KEY }}
-        run: python src/check_election_org.py
+        run: python src/check_election_org.py || true
       - name: Collect public official-state feed
         run: python src/fetch.py || true
       - name: Persist latest status
