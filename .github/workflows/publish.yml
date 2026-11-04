@@ -25,10 +25,7 @@ jobs:
           python-version: '3.12'
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
-      - name: Collect licensed feed
-        env:
-          AP_API_KEY: ${{ secrets.AP_API_KEY }}
-          AP_ELECTIONS_URL: ${{ vars.AP_ELECTIONS_URL }}
+      - name: Collect public official-state feed
         run: python src/fetch.py || true
       - name: Persist latest status
         if: github.event_name != 'push'
