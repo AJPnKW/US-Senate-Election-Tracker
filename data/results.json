@@ -1,7 +1,7 @@
 {
   "source_validated": true,
   "source": "Official state election offices via Open America",
-  "updated_at": "2026-11-04T15:33:10+00:00",
+  "updated_at": "2026-11-04T21:27:04+00:00",
   "stale": false,
   "live": true,
   "races": [
@@ -31,7 +31,7 @@
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-04T15:33:10+00:00",
+      "updated_at": "2026-11-04T21:27:04+00:00",
       "source": "Official state election offices via Open America"
     },
     {
@@ -40,22 +40,22 @@
         {
           "name": "James Talarico",
           "party": "D",
-          "votes": 5405050
+          "votes": 5410057
         },
         {
           "name": "Ken Paxton",
           "party": "R",
-          "votes": 4227281
+          "votes": 4228924
         },
         {
           "name": "Ted Brown",
           "party": "O",
-          "votes": 188747
+          "votes": 188815
         }
       ],
       "reporting_pct": 99.0,
       "called_party": null,
-      "updated_at": "2026-11-04T15:33:10+00:00",
+      "updated_at": "2026-11-04T21:27:04+00:00",
       "source": "Official state election offices via Open America"
     }
   ]
