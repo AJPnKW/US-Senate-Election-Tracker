@@ -28,11 +28,12 @@ jobs:
       - name: Check optional Election.org developer API
         env:
           ELECTION_ORG_API_KEY: ${{ secrets.ELECTION_ORG_API_KEY }}
-        run: python src/check_election_org.py || true
+        run: python src/check_election_org.py
       - name: Collect public official-state feed
+        if: always()
         run: python src/fetch.py || true
       - name: Persist latest status
-        if: github.event_name != 'push'
+        if: always() && github.event_name != 'push'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
