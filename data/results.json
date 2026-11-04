@@ -1,5 +1,62 @@
 {
-  "source_validated": false,
-  "updated_at": null,
-  "races": []
+  "source_validated": true,
+  "source": "Official state election offices via Open America",
+  "updated_at": "2026-11-04T07:19:07+00:00",
+  "stale": false,
+  "live": true,
+  "races": [
+    {
+      "state": "NC",
+      "candidates": [
+        {
+          "name": "Roy Cooper",
+          "party": "D",
+          "votes": 2462440
+        },
+        {
+          "name": "Michael Whatley",
+          "party": "R",
+          "votes": 1640368
+        },
+        {
+          "name": "Shannon W. Bray",
+          "party": "O",
+          "votes": 55718
+        },
+        {
+          "name": "Michael Dublin",
+          "party": "O",
+          "votes": 36426
+        }
+      ],
+      "reporting_pct": 100.0,
+      "called_party": null,
+      "updated_at": "2026-11-04T07:19:07+00:00",
+      "source": "Official state election offices via Open America"
+    },
+    {
+      "state": "TX",
+      "candidates": [
+        {
+          "name": "James Talarico",
+          "party": "D",
+          "votes": 4546036
+        },
+        {
+          "name": "Ken Paxton",
+          "party": "R",
+          "votes": 3567899
+        },
+        {
+          "name": "Ted Brown",
+          "party": "O",
+          "votes": 143283
+        }
+      ],
+      "reporting_pct": 47.0,
+      "called_party": null,
+      "updated_at": "2026-11-04T07:19:07+00:00",
+      "source": "Official state election offices via Open America"
+    }
+  ]
 }
