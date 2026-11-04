@@ -1,4 +1,8 @@
-"""Collect public official-state Senate vote counts via Open America; no credentials."""
+"""Collect official 2026 Senate returns from the documented Open America API.
+
+No projections are inferred. Missing states remain unavailable. Failed/empty
+responses never overwrite a previously valid snapshot.
+"""
 import json
 import sys
 import urllib.request
@@ -14,12 +18,16 @@ def stamp():
 
 def write(path, obj):
     target = ROOT / path
+    target.parent.mkdir(parents=True, exist_ok=True)
     tmp = target.with_suffix(".tmp")
     tmp.write_text(json.dumps(obj, indent=2) + "\n", encoding="utf-8")
     tmp.replace(target)
 
 def convert(payload):
-    if not isinstance(payload, dict) or payload.get("api") != 1 or payload.get("year") != 2026 or str(payload.get("office")).lower() != "senate" or not isinstance(payload.get("races"), dict):
+    if (not isinstance(payload, dict) or payload.get("api") != 1
+            or payload.get("year") != 2026
+            or str(payload.get("office", "")).lower() != "senate"
+            or not isinstance(payload.get("races"), dict)):
         raise ValueError("Unexpected Open America Senate response")
     races = []
     for state, raw in payload["races"].items():
@@ -27,7 +35,8 @@ def convert(payload):
             continue
         candidates = []
         for c in raw.get("cands", []):
-            if not isinstance(c, dict) or not isinstance(c.get("n"), str) or type(c.get("v")) is not int or c["v"] < 0:
+            if (not isinstance(c, dict) or not isinstance(c.get("n"), str)
+                    or type(c.get("v")) is not int or c["v"] < 0):
                 continue
             party = c.get("p", "")
             candidates.append({"name": c["n"], "party": party if party in ("D", "R", "I") else "O", "votes": c["v"]})
@@ -36,22 +45,44 @@ def convert(payload):
         progress = raw.get("pct_in")
         if progress is not None and (type(progress) not in (int, float) or not 0 <= progress <= 100):
             progress = None
-        races.append({"state": state, "candidates": candidates, "reporting_pct": progress, "called_party": None, "updated_at": payload.get("as_of")})
-    return {"source_validated": True, "source": "Official state election offices via Open America", "updated_at": payload.get("as_of"), "races": races}
+        races.append({
+            "state": state, "candidates": candidates,
+            "reporting_pct": progress, "called_party": None,
+            "updated_at": payload.get("as_of"),
+            "source": "Official state election offices via Open America",
+        })
+    return {
+        "source_validated": True,
+        "source": "Official state election offices via Open America",
+        "updated_at": payload.get("as_of"),
+        "stale": bool(payload.get("stale")),
+        "live": bool(payload.get("live")),
+        "races": races,
+    }
 
 def main():
     try:
-        request = urllib.request.Request(URL, headers={"Accept": "application/json", "Accept-Encoding": "identity", "User-Agent": "AJPnKW-US-Senate-Election-Tracker/1.0"})
+        request = urllib.request.Request(URL, headers={
+            "Accept": "application/json",
+            "User-Agent": "AJPnKW-US-Senate-Election-Tracker/1.0",
+        })
         with urllib.request.urlopen(request, timeout=25) as response:
             payload = json.load(response)
         result = convert(payload)
+        if not result["races"]:
+            raise ValueError("No monitored Senate races in feed; preserving last valid snapshot")
         write("data/results.json", result)
-        write("data/fetch_status.json", {"checked_at": stamp(), "ok": True, "error": None, "source": result["source"]})
-        print("Collected", len(result["races"]), "monitored states from Open America")
+        write("data/fetch_status.json", {
+            "checked_at": stamp(), "ok": True, "error": None,
+            "source": result["source"], "states": len(result["races"]),
+        })
+        print("Collected", len(result["races"]), "monitored Senate races")
         return 0
     except Exception as exc:
         message = str(exc)[:240]
-        write("data/fetch_status.json", {"checked_at": stamp(), "ok": False, "error": message})
+        write("data/fetch_status.json", {
+            "checked_at": stamp(), "ok": False, "error": message,
+        })
         print("Collection failed:", message, file=sys.stderr)
         return 1
 
