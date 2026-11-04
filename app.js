@@ -27,8 +27,9 @@ function render(data,status){
      pct(r?.reporting_pct),leader].forEach(v=>cell(tr,v));
     body.append(tr);
   }
-  $("called").textContent=live?called+"/8":dash;
-  $("uncalled").textContent=live?(8-called)+"/8":dash;
+  const hasCalls=(data.races||[]).some(r=>r.call_source);
+  $("called").textContent=hasCalls?called+"/8":dash;
+  $("uncalled").textContent=hasCalls?(8-called)+"/8":dash;
   $("flips").textContent=dash;
   $("balance").textContent="National control unavailable: this state-results feed does not cover all 35 Senate races or issue race calls.";
   $("feed-state").textContent=live?(data.stale?"STATE COUNTS — STALE":"OFFICIAL STATE COUNTS"):data.source_validated?"AWAITING STATE RESULTS":"DATA UNAVAILABLE";
@@ -40,5 +41,28 @@ function render(data,status){
   $("feed-state").parentElement.classList.toggle("error",!live||!!status?.error||!!data.stale);
 }
 async function readJson(path){const r=await fetch(path+"?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw Error(path+": HTTP "+r.status);return r.json()}
-async function refresh(){try{const[data,status]=await Promise.all([readJson("data/results.json"),readJson("data/fetch_status.json")]);render(data,status)}catch(e){render({races:[],source_validated:false},{error:"Unable to load results: "+e.message})}}
+function convertPublic(payload){
+  if(!payload||payload.api!==1||payload.year!==2026||String(payload.office).toLowerCase()!=="senate"||!payload.races||typeof payload.races!=="object")throw Error("Unexpected public-feed schema");
+  const races=Object.entries(payload.races).filter(([state,r])=>STATES.some(s=>s[0]===state)&&r&&Array.isArray(r.cands)).map(([state,r])=>({
+    state,reporting_pct:typeof r.pct_in==="number"?r.pct_in:null,called_party:null,
+    candidates:r.cands.filter(c=>typeof c.n==="string"&&Number.isSafeInteger(c.v)&&c.v>=0).map(c=>({name:c.n,party:["D","R","I"].includes(c.p)?c.p:"O",votes:c.v}))
+  })).filter(r=>r.candidates.length);
+  return {source_validated:true,source:"Official state election offices via Open America",updated_at:payload.as_of||null,stale:Boolean(payload.stale),races};
+}
+async function refresh(){
+  let snapshot=null,status=null;
+  try{[snapshot,status]=await Promise.all([readJson("data/results.json"),readJson("data/fetch_status.json")])}catch(e){status={error:"GitHub snapshot unavailable: "+e.message}}
+  try{
+    const url="https://openamerica.io/elections/results.json?year=2026&office=Senate";
+    const response=await fetch(url,{cache:"no-store",credentials:"omit"});
+    if(!response.ok)throw Error("HTTP "+response.status);
+    const direct=convertPublic(await response.json());
+    if(direct.races.length){render(direct,{checked_at:new Date().toISOString(),error:direct.stale?"Public state feed is stale":null});return}
+    if(snapshot?.races?.length){render(snapshot,{...status,error:"Direct public feed returned no monitored races; showing saved snapshot"});return}
+    render(direct,{checked_at:new Date().toISOString(),error:"No monitored state counts available in public feed yet"});return;
+  }catch(e){
+    if(snapshot){render(snapshot,{...status,error:"Direct public feed unavailable: "+e.message+(status?.error?" · "+status.error:"")});return}
+    render({races:[],source_validated:false},{error:"No results source available: "+e.message});
+  }
+}
 $("refresh").addEventListener("click",refresh);refresh();setInterval(refresh,60000);
