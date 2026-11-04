@@ -1,0 +1,5 @@
+{
+  "checked_at": null,
+  "ok": false,
+  "error": "AP feed not configured. Add AP_API_KEY and AP_ELECTIONS_URL."
+}
