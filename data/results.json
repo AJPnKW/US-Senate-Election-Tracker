@@ -1,9 +1,9 @@
 {
   "source_validated": true,
   "source": "Official state election offices via Open America",
-  "updated_at": "2026-11-06T21:55:30+00:00",
+  "updated_at": "2026-11-07T01:40:24+00:00",
   "stale": false,
-  "live": false,
+  "live": true,
   "races": [
     {
       "state": "NC",
@@ -31,7 +31,7 @@
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-06T21:55:30+00:00",
+      "updated_at": "2026-11-07T01:40:24+00:00",
       "source": "Official state election offices via Open America"
     },
     {
@@ -55,7 +55,7 @@
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-06T21:55:30+00:00",
+      "updated_at": "2026-11-07T01:40:24+00:00",
       "source": "Official state election offices via Open America"
     }
   ]
