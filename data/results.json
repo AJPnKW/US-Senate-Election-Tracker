@@ -1,7 +1,7 @@
 {
   "source_validated": true,
   "source": "Official state election offices via Open America",
-  "updated_at": "2026-11-10T18:25:06+00:00",
+  "updated_at": "2026-11-10T23:35:12+00:00",
   "stale": false,
   "live": true,
   "races": [
@@ -11,27 +11,27 @@
         {
           "name": "Roy Cooper",
           "party": "D",
-          "votes": 2468229
+          "votes": 2477405
         },
         {
           "name": "Michael Whatley",
           "party": "R",
-          "votes": 1643264
+          "votes": 1647374
         },
         {
           "name": "Shannon W. Bray",
           "party": "O",
-          "votes": 55733
+          "votes": 55997
         },
         {
           "name": "Michael Dublin",
           "party": "O",
-          "votes": 36408
+          "votes": 36619
         }
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-10T18:25:06+00:00",
+      "updated_at": "2026-11-10T23:35:12+00:00",
       "source": "Official state election offices via Open America"
     },
     {
@@ -55,7 +55,7 @@
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-10T18:25:06+00:00",
+      "updated_at": "2026-11-10T23:35:12+00:00",
       "source": "Official state election offices via Open America"
     }
   ]
