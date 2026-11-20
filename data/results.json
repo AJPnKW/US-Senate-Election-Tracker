@@ -1,7 +1,7 @@
 {
   "source_validated": true,
   "source": "Official state election offices via Open America",
-  "updated_at": "2026-11-20T13:20:23+00:00",
+  "updated_at": "2026-11-20T21:20:12+00:00",
   "stale": false,
   "live": true,
   "races": [
@@ -11,7 +11,7 @@
         {
           "name": "Roy Cooper",
           "party": "D",
-          "votes": 2480636
+          "votes": 2480632
         },
         {
           "name": "Michael Whatley",
@@ -26,12 +26,12 @@
         {
           "name": "Michael Dublin",
           "party": "O",
-          "votes": 36710
+          "votes": 36711
         }
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-20T13:20:23+00:00",
+      "updated_at": "2026-11-20T21:20:12+00:00",
       "source": "Official state election offices via Open America"
     },
     {
@@ -55,7 +55,7 @@
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-20T13:20:23+00:00",
+      "updated_at": "2026-11-20T21:20:12+00:00",
       "source": "Official state election offices via Open America"
     }
   ]
