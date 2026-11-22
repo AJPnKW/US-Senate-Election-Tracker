@@ -1,7 +1,7 @@
 {
   "source_validated": true,
   "source": "Official state election offices via Open America",
-  "updated_at": "2026-11-22T17:35:45+00:00",
+  "updated_at": "2026-11-22T22:45:18+00:00",
   "stale": false,
   "live": true,
   "races": [
@@ -16,12 +16,12 @@
         {
           "name": "Michael Whatley",
           "party": "R",
-          "votes": 1648858
+          "votes": 1648859
         },
         {
           "name": "Shannon W. Bray",
           "party": "O",
-          "votes": 56084
+          "votes": 56085
         },
         {
           "name": "Michael Dublin",
@@ -31,7 +31,7 @@
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-22T17:35:45+00:00",
+      "updated_at": "2026-11-22T22:45:18+00:00",
       "source": "Official state election offices via Open America"
     },
     {
@@ -55,7 +55,7 @@
       ],
       "reporting_pct": 100.0,
       "called_party": null,
-      "updated_at": "2026-11-22T17:35:45+00:00",
+      "updated_at": "2026-11-22T22:45:18+00:00",
       "source": "Official state election offices via Open America"
     }
   ]
